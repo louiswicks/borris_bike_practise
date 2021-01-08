@@ -12,7 +12,7 @@ describe '#release_bike' do
       bike = Bike.new
       subject.dock(bike)
       # we want to release the bike we docked
-      expect(subject.release_bike).to eq bike
+      expect(subject.release_bike).to eq [bike]
     end
 
     it 'raises an error when there are no bikes available' do
@@ -21,7 +21,7 @@ end
 end
 describe '#dock' do
   it 'raises an error when full' do
-    subject.dock(Bike.new)
+    20.times { subject.dock(Bike.new) }
     expect { subject.dock Bike.new }.to raise_error 'Docking station full'
   end
 end
@@ -31,6 +31,6 @@ it 'show the docked bikes' do
     bike = Bike.new
     subject.dock(bike)
     # Again, we need to return the bike we just docked
-    expect(subject.bike).to eq bike
+    expect(subject.bikes).to eq [bike]
 end
 end
